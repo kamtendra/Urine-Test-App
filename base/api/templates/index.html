@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/media/style.css">
+    </head>
+    <body>
+        <form id="upload-form" method="POST" enctype="multipart/form-data">
+            <h1><strong>UPLOAD URINE STRIP IMAGE</strong> | GET RGB</h1>
+            <div class="form-group">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <center><button type="submit">GET RESULT</button></center>
+            </div>
+            {% comment %} 
+            
+            <div class="form-group">
+              <label for="title">Title <span>(Optional)</span></label>
+              <input type="text" name="title" id="title" class="form-controll"/>
+            </div>
+            <div class="form-group">
+              <label for="caption">Caption<span>(Optional)</span></label>
+              <input type="text" name="caption" id="caption" class="form-controll"/>
+            </div>
+            
+            <div class="form-group file-area">
+                  <label for="images">Image </label>
+              <input type="file" name="images" id="images" required="required" multiple="multiple"/>
+              <div class="file-dummy">
+                <div class="success">Great, your image is selected.</div>
+                <div class="default">Please Select The Image</div>
+              </div>
+            </div>
+            {% endcomment %}
+            
+        </form>
+        {% comment %} <br>
+        {% if obj %}
+        <h1> Succesfully Uploaded:</h1>
+        <br>
+        <img src="{{ obj.image.url }}" alt="image" class="img-thumbnail" height="150" width="150">
+        <br>
+        {{ x }}
+        <br>
+        {% comment %} {{MEDIA_URL}} {% endcomment %}
+        {% comment %} <br> {{obj.image.url}}
+        {% endif %}  {% endcomment %}
+
+        <div id="response"></div>
+          
+          
+          
+        <link href='https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700' rel='stylesheet' type='text/css'>
+          
+        
+        <script src="" async defer></script>
+    </body>
+</html>
