@@ -16,10 +16,15 @@ def home(request):
         if form.is_valid():
             form.save()
             obj=form.instance
-            img_name=str(obj.image)
-            x=cv2.imread(r"C:/Users/kamte/Urine-Test-App/base/public/static/{img_name}")
-            print(x)
-            return redirect('/',{"obj":obj,"x":x})
+            path=str(obj.image)
+            image = cv2.imread(f"C:/Users/kamte/OneDrive/Documents/Desktop/Urine Test App/base/public/static/{path}")
+            strip = extract_strip(image)
+            colors = get_colors(strip)
+            color_labels = ['URO', 'BIL', 'KET', 'BLD', 'PRO', 'NIT', 'LEU', 'GLU', 'SG', 'PH']
+            color_data = {color_labels[i]: colors[i] for i in range(len(colors))}
+            result = json.dumps(color_data, indent=2)
+            print(result)
+            return render(request,'index.html',{"obj":obj,"result":result})
     else:
         form = UploadForm()
         img=UploadModel.objects.all()
